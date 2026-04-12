@@ -4,6 +4,30 @@
   <p id="colorCode">#FFFFFF</p>
 </main>
 
+<script>
+  function generarColor() {
+  const letras = "0123456789ABCDEF";
+  let color = "#";
+
+  for (let i = 0; i < 6; i++) {
+    color += letras[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+}
+  const boton = document.getElementById("btnColor");
+const texto = document.getElementById("colorCode");
+
+boton.addEventListener("click", () => {
+  const nuevoColor = generarColor();
+
+  document.body.style.backgroundColor = nuevoColor;
+  texto.textContent = nuevoColor;
+});
+</script>
+
+
+
 <style>
 button {
   padding: 6px 50px;
@@ -12,6 +36,6 @@ button {
   transition: transform 0.2s;
 }
 button:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 </style>
