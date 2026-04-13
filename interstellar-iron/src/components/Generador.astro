@@ -8,32 +8,15 @@
 
 <section id="generador">
   <h1>Generador de Colores</h1>
-  <button id="btnColor">Generar Color</button>
+  <h2>Abajo podes ver el historial de los coleres que fueron apareciendo (hasta 5 colores)</h2>
+  <button id="botonColor">Generar Color</button>
   <p id="colorCode">#FFFFFF</p>
 </section>
 
-<script>
-  function generarColor() {
-  const letras = "0123456789ABCDEF";
-  let color = "#";
-
-  for (let i = 0; i < 6; i++) {
-    color += letras[Math.floor(Math.random() * 16)];
-  }
-
-  return color;
-}
-  const boton = document.getElementById("btnColor");
-const texto = document.getElementById("colorCode");
-const generador = document.getElementById("generador");
-
-boton.addEventListener("click", () => {
-  const nuevoColor = generarColor();
-
-  generador.style.background = `linear-gradient(to top, ${nuevoColor}, white)`;
-  texto.textContent = nuevoColor;
-});
-</script>
+<section id="historial">
+  <h2>Historial de colores</h2>
+  <div id="listaColores"></div>
+</section>
 
 <style>
 button {
@@ -60,8 +43,95 @@ button:hover {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 20px;
 }
+
+#historial {
+  min-height: 100vh;
+  padding: 40px;
+}
+
+#listaColores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.color-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #000000;
+}
 </style>
+
+<script is:inline>
+  const listaColores = document.getElementById("listaColores");
+  console.log(listaColores)
+  let historial = [];
+  const MAX_COLORES = 5;
+
+  function generarColor() {
+    const letras = "0123456789ABCDEF";
+    let color = "#";
+
+    for (let i = 0; i < 6; i++) {
+      color += letras[Math.floor(Math.random() * 16)];
+    }
+
+    return color;
+  }
+
+  const boton = document.getElementById("botonColor");
+  const texto = document.getElementById("colorCode");
+  const generador = document.getElementById("generador");
+
+  boton.addEventListener("click", () => {
+    const nuevoColor = generarColor();
+    console.log("click funciona");
+
+    generador.style.background = `linear-gradient(to top, ${nuevoColor}, white)`;
+    texto.textContent = nuevoColor;
+
+    historial.push(nuevoColor);
+
+    if (historial.length > MAX_COLORES) {
+      historial.shift();
+    }
+
+    mostrarHistorial();
+  });
+
+function mostrarHistorial() {
+  console.log(listaColores)
+  listaColores.innerHTML = "";
+
+  for (let i = 0; i < historial.length; i++) {
+    const contenedor = document.createElement("div");
+
+    const div = document.createElement("div");
+    div.style.width = "60px";
+    div.style.height = "60px";
+    div.style.backgroundColor = historial[i];
+    div.style.margin = "5px";
+
+    const texto = document.createElement("p");
+    texto.textContent = historial[i];
+    texto.style.fontSize = "12px";
+    texto.style.margin = "0";
+
+    contenedor.appendChild(div);
+    contenedor.appendChild(texto);
+
+    contenedor.style.display = "flex";
+    contenedor.style.flexDirection = "column";
+    contenedor.style.alignItems = "center";
+
+    listaColores.appendChild(contenedor);
+    };
+  }
+</script>
