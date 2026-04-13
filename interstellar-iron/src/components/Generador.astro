@@ -1,8 +1,16 @@
-<main>
+<section id="inicio">
+  <h1>Bienvenido a HexaGen</h1>
+  <p>Generá colores aleatorios fácilmente</p>
+  <a href="#generador">
+    <button>Empezar</button>
+  </a>
+</section>
+
+<section id="generador">
   <h1>Generador de Colores</h1>
   <button id="btnColor">Generar Color</button>
   <p id="colorCode">#FFFFFF</p>
-</main>
+</section>
 
 <script>
   function generarColor() {
@@ -26,8 +34,6 @@ boton.addEventListener("click", () => {
 });
 </script>
 
-
-
 <style>
 button {
   padding: 6px 50px;
@@ -37,5 +43,23 @@ button {
 }
 button:hover {
   transform: scale(1.2);
+}
+
+#inicio {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#generador {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 </style>
