@@ -25,11 +25,12 @@
 }
   const boton = document.getElementById("btnColor");
 const texto = document.getElementById("colorCode");
+const generador = document.getElementById("generador");
 
 boton.addEventListener("click", () => {
   const nuevoColor = generarColor();
 
-  document.body.style.backgroundColor = nuevoColor;
+  generador.style.background = `linear-gradient(to top, ${nuevoColor}, white)`;
   texto.textContent = nuevoColor;
 });
 </script>
@@ -52,6 +53,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  background: linear-gradient(to bottom, white, transparent);
 }
 
 #generador {
